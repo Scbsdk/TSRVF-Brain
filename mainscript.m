@@ -54,7 +54,7 @@ for count=1:num_bundles
     Df(:,:) = pairdistance(h,h);
     Df_all(:,:,count) = Df(:,:);
 end
-    save E:\fibers_cluster\fiber_cluster_data\105115\output_dir\distance.mat Ds_all Df_all 
+    save E:\fibers_cluster\fiber_cluster_data\output_dir\distance.mat Ds_all Df_all 
     
   %% Estimate the number of clusters
   Alpha = 0.5;  % Choose the weight of shape and function
@@ -64,8 +64,8 @@ end
       D = Alpha*Ds_all(:,:,count)+(1-Alpha)*Df_all(:,:,count);
       EstimateK(count) = estimate(D);
   end
-if (~isfolder('E:\fiber_data\103414\output_dir'))
-    mkdir E:\fiber_data\103414 output_dir
+if (~isfolder('E:\fiber_data\output_dir'))
+    mkdir E:\fiber_data\output_dir
 end
 
 %% Perform Spectral clustering
@@ -95,7 +95,7 @@ end
       end
       for(i=1:BestK(count))
           fibers.data=Cluster_fibers{i};
-          cd E:\fiber_data\106016\output_dir
+          cd E:\fiber_data\output_dir
           filename = ['Cluster' num2str(Cluster_IDX) '_' bundles(count).name];
           Cluster_IDX = Cluster_IDX+1;
           write_mrtrix_tracks (fibers, filename);
